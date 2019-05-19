@@ -1,0 +1,60 @@
+/* lecture.css */
+
+body {
+	padding: 5% 10%;
+}
+div#libraries {
+	background-color: #ccffcc;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	margin: 10px auto;
+	border: 1px solid #d9d9d9;
+}
+div.library {
+    display: inline-block;
+  	width: 75%;
+    margin: 2.5% auto;
+  	padding: 2% 2.5%;
+  	line-height: 1.5;
+  	background: white;
+    border: 2px #eaeaea double;
+    border-width: 0.5px; 
+  	overflow: hidden;
+  	transition: transform 0.7s;
+    border-top: 6px solid #32b67a;
+    -webkit-border-bottom-left-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	
+	font-family: Verdana, Helvetica, sans-serif;
+	color: #0000ff;
+  }
+  
+div.library:hover {
+	-webkit-box-shadow: 10px 10px 15px 0px rgba(205,205,205,1);
+    -moz-box-shadow: 10px 10px 15px 0px rgba(205,205,205,1);
+    box-shadow: 10px 10px 15px 0px rgba(205,205,205,1);
+    transform:translate(-20px,-20px);
+  }
+  
+div.library span.title {
+	displya: block;
+	font-size: 20px;
+	color: darkgray;
+	letter-spacing: 1.2;
+	margin-bottom: 20px;
+}
+div.library span.sub {
+	displya: block;
+	font-size: 15px;
+	color: gray;
+	line-height: 20px;
+}
+
+div.map {
+	margin: 20px auto;
+	width: 100%;
+	height: 250px;
+	border: 2px solid #32b67a;
+}
