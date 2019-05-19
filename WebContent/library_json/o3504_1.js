@@ -1,10 +1,26 @@
 window.onload = function() {
-    handleRefresh();
+	handleRefresh();
 }
+
+//localStorage 사용하는 방법
+ 
+function changeIndex(){
+	localStorage.start_library = document.getElementById("start_library_index").value;
+	localStorage.end_library = document.getElementById("end_library_index").value;
+	location.href = location.href;
+}
+
 function handleRefresh() {
-	console.log("here");
 	
-	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/1/30/";
+	if(!localStorage.start_library) {
+		changeIndex();
+	} else {
+		document.getElementById("start_library_index").value = localStorage.start_library;
+		document.getElementById("end_library_index").value = localStorage.end_library;
+	}
+
+	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + (parseInt(localStorage.start_library) + parseInt(localStorage.end_library) -1) + "/";
+	console.log(url);
 	$.getJSON(url, updateLibrary);
 }
 
@@ -79,7 +95,7 @@ function updateLibrary(libraries) {
 			str = str + " 정기 휴관일: "+ value3 + "<pre>\n</pre>"
 		}
 		if(value4) {
-			str = str + " 전화번호:"+ value4 + "<pre>\n</pre>";
+			str = str + " 전화번호: "+ value4 + "<pre>\n</pre>";
 		}
 		
 		sub.innerHTML = str;

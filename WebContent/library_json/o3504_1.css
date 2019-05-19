@@ -41,9 +41,9 @@ div.library:hover {
 div.library span.title {
 	display: block;
 	font-size: 20px;
-	color: darkgray;
+	color: #464646;
 	letter-spacing: 1.2;
-	margin-bottom: 15px;
+	margin-bottom: 7px;
 }
 div.library span.sub {
 	display: block;

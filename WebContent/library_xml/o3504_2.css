@@ -13,8 +13,8 @@ div#libraries {
 div.library {
     display: inline-block;
   	width: 75%;
-    margin: 2.5% auto;
-  	padding: 2% 2.5%;
+    margin: 2.5% 4.5%;
+  	padding: 2.5%;
   	line-height: 1.5;
   	background: white;
     border: 2px #eaeaea double;
@@ -39,14 +39,14 @@ div.library:hover {
   }
   
 div.library span.title {
-	displya: block;
+	display: block;
 	font-size: 20px;
-	color: darkgray;
+	color: #464646;
 	letter-spacing: 1.2;
-	margin-bottom: 15px;
+	margin-bottom: 7px;
 }
 div.library span.sub {
-	displya: block;
+	display: block;
 	font-size: 15px;
 	color: gray;
 	line-height: 15px;

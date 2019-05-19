@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+
+<title>서울시 도서관 목록 - JSON</title>
+<script type="text/javascript" src="o3504_1.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=43a897f13dfd890ecf4563df2d169dda"></script>
+<link rel="stylesheet" href="o3504_1.css">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+	<div data-role="header"
+		style="background:white; border: 6px solid #32b67a; color: #32b67a; text-align: center; font-size: 20px; letter-spacing: 1.3; height: 45px; line-height: 45px; padding: 20px;">
+		서울 도서관 조회 서비스
+	</div>
+
+	<div style="float: left; width: 100%; background:rgb(245, 242, 242); color: #32b67a; font-size: 20px; letter-spacing: 1.3; line-height: 30px;">
+		<div data-role="today" style="float: left; margin: 10px 50px;">
+			오늘은?
+			<button id="btn_today" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;">확인하기</button>
+			<span id="today_result" style="display: inline-block; color: #464646;"></span>
+		</div>
+		
+		<div data-role="month" style="clear: left; float: left; margin: 10px 50px;">
+			이번 달은?
+			<button id="btn_month" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;">확인하기</button>
+			<span id="month_result" style="display: inline-block; color: #464646;"></span>
+		</div>
+		
+		<div data-role="control" style="float: right; margin: 10px 50px;">
+		<label style="float: left;">시작<input type="number" id="start_library_index" value="1" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
+		<label style="float: left;">개수<input type="number" id="end_library_index" value="30" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
+		<button onClick="changeIndex()" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;">적용</button>
+		</div>
+	</div>
+	
+	<div id="libraries"></div>
+
+</body>
+</html>

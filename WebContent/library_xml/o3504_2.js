@@ -1,10 +1,25 @@
 window.onload = function() {
-    handleRefresh();
+	handleRefresh();
 }
+
+//localStorage 사용하는 방법
+ 
+function changeIndex(){
+	localStorage.start_library = document.getElementById("start_library_index").value;
+	localStorage.end_library = document.getElementById("end_library_index").value;
+	location.href = location.href;
+}
+
 function handleRefresh() {
-	console.log("here");
 	
-	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/xml/SeoulLibraryTimeInfo/1/30/";
+	if(!localStorage.start_library) {
+		changeIndex();
+	} else {
+		document.getElementById("start_library_index").value = localStorage.start_library;
+		document.getElementById("end_library_index").value = localStorage.end_library;
+	}
+	
+	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/xml/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + (parseInt(localStorage.start_library) + parseInt(localStorage.end_library) -1) + "/";
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -89,7 +104,7 @@ function updateLibrary(xml) {
 			str = str + " 정기 휴관일: "+ value3.nodeValue + "<pre>\n</pre>"
 		}
 		if(value4) {
-			str = str + " 전화번호:"+ value4.nodeValue + "<pre>\n</pre>";
+			str = str + " 전화번호: "+ value4.nodeValue + "<pre>\n</pre>";
 		}
 		
 		sub.innerHTML = str;
@@ -99,6 +114,6 @@ function updateLibrary(xml) {
 		div.appendChild(sub);
 		div.appendChild(mapDiv);
 		
-		showMap(mapDiv, library.XCNTS, library.YDNTS);
+		showMap(mapDiv, row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue, row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue);
 	}
 }
