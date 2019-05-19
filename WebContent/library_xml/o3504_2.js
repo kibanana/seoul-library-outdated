@@ -10,13 +10,23 @@ function changeIndex(){
 	location.href = location.href;
 }
 
+function changeGu(){
+	localStorage.gu_selected = document.getElementById("gu_select").value;
+	location.href = location.href;
+}
+
 function handleRefresh() {
-	
 	if(!localStorage.start_library) {
 		changeIndex();
 	} else {
 		document.getElementById("start_library_index").value = localStorage.start_library;
 		document.getElementById("end_library_index").value = localStorage.end_library;
+	}
+	
+	if(!localStorage.gu_selected) {
+		changeGu();
+	} else {
+		document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected;
 	}
 	
 	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/xml/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + (parseInt(localStorage.start_library) + parseInt(localStorage.end_library) -1) + "/";
@@ -32,8 +42,6 @@ function handleRefresh() {
 }
 
 function showMap(mapContainer, x, y) {
-	
-	console.log(x + " " + y + "" + location); 
 	
 	var mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
@@ -57,9 +65,17 @@ function showMap(mapContainer, x, y) {
 }
 
 function updateLibrary(xml) {
+
 	var xmlDoc = xml.responseXML;
 	var librariesDiv = document.getElementById("libraries");
 	libraries = xmlDoc.getElementsByTagName("row");
+
+	//var max = parseInt(libraries.SeoulLibraryTimeInfo.list_total_count[0].nodeType);
+	document.getElementById("end_library_index").setAttribute("max", 1365);
+
+	var guDiv = document.getElementById("gu");
+	
+	var selected = localStorage.gu_selected;
 	
 	for (var i = 0; i < libraries.length; i++) {
 		
@@ -69,14 +85,6 @@ function updateLibrary(xml) {
 		var value2 = row.getElementsByTagName("ADRES")[0].childNodes[0];
 		var value3 = row.getElementsByTagName("FDRM_CLOSE_DATE")[0].childNodes[0];
 		var value4 = row.getElementsByTagName("TEL_NO")[0].childNodes[0];
-		
-		/*if(value1){ //'구' 단위로 작은탭을 적용하기 위한 제어문 
-			if(gu==value1.nodeValue) {
-				
-			} else {
-				
-			}
-		}*/
 		
 		var div = document.createElement("div");
 		div.setAttribute("class", "library");
@@ -88,14 +96,54 @@ function updateLibrary(xml) {
 		var mapDiv = document.createElement("div");
 		mapDiv.setAttribute("class", "map");
 		
-		
-		title.innerHTML = "No. "+ row.getElementsByTagName("LBRRY_SEQ_NO")[0].childNodes[0].nodeValue + "<pre>\n</pre>"
+		title.innerHTML = "No. "+ row.getElementsByTagName("LBRRY_SEQ_NO")[0].childNodes[0].nodeValue + " "
 		 + row.getElementsByTagName("LBRRY_NAME")[0].childNodes[0].nodeValue + "<pre>\n</pre>";
 		
 		var str = "";
 		
 		if(value1){
-			str = str + " 구명: "+ value1.nodeValue + "<pre>\n</pre>"
+			str = str + " 구명: "+ value1.nodeValue + "<pre>\n</pre>";
+
+			//Gu탭 처리 과정 끼워넣음
+			if(selected==value1.nodeValue){
+
+				var singleGu = document.createElement("div");
+				singleGu.setAttribute("class", "library");
+				var guTitle = document.createElement("span");
+				guTitle.setAttribute("class", "title");
+				var guSub = document.createElement("span");
+				guSub.setAttribute("class", "sub");
+				
+				guTitle.innerHTML = "No. "+ row.getElementsByTagName("LBRRY_SEQ_NO")[0].childNodes[0].nodeValue + " "
+				 + row.getElementsByTagName("LBRRY_NAME")[0].childNodes[0].nodeValue + "<pre>\n</pre>";
+				
+				var guStr = "";
+				
+				if(value2){
+					guStr = guStr + " 주소: "+ value2.nodeValue + "<pre>\n</pre>"
+				}
+				if(value3){
+					guStr = guStr + " 정기 휴관일: "+ value3.nodeValue + "<pre>\n</pre>"
+				}
+				if(value4) {
+					guStr = guStr + " 전화번호: "+ value4.nodeValue + "<pre>\n</pre>";
+				}
+				
+				guSub.innerHTML = guStr;
+				
+				var gumapDiv = document.createElement("div");
+				gumapDiv.setAttribute("class", "map");
+				gumapDiv.setAttribute("id", "map"+i);
+				
+				guDiv.appendChild(singleGu);
+				
+				singleGu.appendChild(guTitle);
+				singleGu.appendChild(guSub);
+				singleGu.appendChild(gumapDiv);
+				
+				showMap(gumapDiv, row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue, row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue);
+
+			}
 		}
 		if(value2){
 			str = str + " 주소: "+ value2.nodeValue + "<pre>\n</pre>"
