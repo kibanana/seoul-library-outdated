@@ -14,7 +14,7 @@ function showMap(mapContainer, x, y) {
 	
 	var mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 4 // 지도의 확대 레벨
     };
 
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -65,21 +65,21 @@ function updateLibrary(libraries) {
 		mapDiv.setAttribute("class", "map");
 		mapDiv.setAttribute("id", "map"+i);
 		
-		title.innerHTML = "No. "+library.LBRRY_SEQ_NO + " -\n " +library.LBRRY_NAME + "\n";
+		title.innerHTML = "No. "+library.LBRRY_SEQ_NO + "<pre>\n</pre>" +library.LBRRY_NAME + "<pre>\n</pre>";
 		
 		var str = "";
 		
 		if(value1){
-			str = str + " 구명: "+ value1 + "\n"
+			str = str + " 구명: "+ value1 + "<pre>\n</pre>"
 		}
 		if(value2){
-			str = str + " 주소: "+ value2 + "\n"
+			str = str + " 주소: "+ value2 + "<pre>\n</pre>"
 		}
 		if(value3){
-			str = str + " 정기 휴관일: "+ value3 + "\n"
+			str = str + " 정기 휴관일: "+ value3 + "<pre>\n</pre>"
 		}
 		if(value4) {
-			str = str + " 전화번호:"+ value4 + "\n";
+			str = str + " 전화번호:"+ value4 + "<pre>\n</pre>";
 		}
 		
 		sub.innerHTML = str;

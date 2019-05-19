@@ -22,7 +22,7 @@ function showMap(mapContainer, x, y) {
 	
 	var mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 4 // 지도의 확대 레벨
     };
 
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -74,22 +74,22 @@ function updateLibrary(xml) {
 		mapDiv.setAttribute("class", "map");
 		
 		
-		title.innerHTML = "No. "+ row.getElementsByTagName("LBRRY_SEQ_NO")[0].childNodes[0].nodeValue + " -\n"
-		 + row.getElementsByTagName("LBRRY_NAME")[0].childNodes[0].nodeValue + "\n";
+		title.innerHTML = "No. "+ row.getElementsByTagName("LBRRY_SEQ_NO")[0].childNodes[0].nodeValue + "<pre>\n</pre>"
+		 + row.getElementsByTagName("LBRRY_NAME")[0].childNodes[0].nodeValue + "<pre>\n</pre>";
 		
 		var str = "";
 		
 		if(value1){
-			str = str + " 구명: "+ value1.nodeValue + "\n"
+			str = str + " 구명: "+ value1.nodeValue + "<pre>\n</pre>"
 		}
 		if(value2){
-			str = str + " 주소: "+ value2.nodeValue + "\n"
+			str = str + " 주소: "+ value2.nodeValue + "<pre>\n</pre>"
 		}
 		if(value3){
-			str = str + " 정기 휴관일: "+ value3.nodeValue + "\n"
+			str = str + " 정기 휴관일: "+ value3.nodeValue + "<pre>\n</pre>"
 		}
 		if(value4) {
-			str = str + " 전화번호:"+ value4.nodeValue + "\n";
+			str = str + " 전화번호:"+ value4.nodeValue + "<pre>\n</pre>";
 		}
 		
 		sub.innerHTML = str;
