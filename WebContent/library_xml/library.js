@@ -16,9 +16,11 @@ function handleRefresh() {
 	xhttp.send();
 }
 
-function showMap(location, x, y) {
-	var mapContainer = document.getElementById(location), // 지도를 표시할 div 
-    mapOption = { 
+function showMap(mapContainer, x, y) {
+	
+	console.log(x + " " + y + "" + location); 
+	
+	var mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
@@ -27,7 +29,7 @@ function showMap(location, x, y) {
 	var map = new daum.maps.Map(mapContainer, mapOption); 
 	
 	// 마커가 표시될 위치입니다 
-	var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+	var markerPosition  = new daum.maps.LatLng(x, y); 
 
 	// 마커를 생성합니다
 	var marker = new daum.maps.Marker({
@@ -36,6 +38,7 @@ function showMap(location, x, y) {
 
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+	
 }
 
 function updateLibrary(xml) {
@@ -95,5 +98,7 @@ function updateLibrary(xml) {
 		div.appendChild(title);
 		div.appendChild(sub);
 		div.appendChild(mapDiv);
+		
+		showMap(mapDiv, library.XCNTS, library.YDNTS);
 	}
 }

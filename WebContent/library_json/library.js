@@ -8,9 +8,11 @@ function handleRefresh() {
 	$.getJSON(url, updateLibrary);
 }
 
-function showMap(location, x, y) {
-	var mapContainer = document.getElementById(location), // 지도를 표시할 div 
-    mapOption = { 
+function showMap(mapContainer, x, y) {
+	
+	console.log(x + " " + y + "" + location); 
+	
+	var mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
@@ -29,7 +31,6 @@ function showMap(location, x, y) {
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 	
-	console.log(x + " " + y + "" + location); 
 }
 
 function updateLibrary(libraries) {
@@ -63,8 +64,6 @@ function updateLibrary(libraries) {
 		var mapDiv = document.createElement("div");
 		mapDiv.setAttribute("class", "map");
 		mapDiv.setAttribute("id", "map"+i);
-		showMap("map"+i, library.XCNTS, library.YDNTS);
-		
 		
 		title.innerHTML = "No. "+library.LBRRY_SEQ_NO + " -\n " +library.LBRRY_NAME + "\n";
 		
@@ -89,6 +88,8 @@ function updateLibrary(libraries) {
 		div.appendChild(title);
 		div.appendChild(sub);
 		div.appendChild(mapDiv);
+
+		showMap(mapDiv, library.XCNTS, library.YDNTS);
 	}
 
 }
