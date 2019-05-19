@@ -70,7 +70,7 @@ function updateLibrary(xml) {
 	var librariesDiv = document.getElementById("libraries");
 	libraries = xmlDoc.getElementsByTagName("row");
 
-	//var max = parseInt(libraries.SeoulLibraryTimeInfo.list_total_count[0].nodeType);
+	var max = parseInt(xmlDoc.getElementsByTagName("list_total_count")[0].childNodes[0].nodeValue);
 	document.getElementById("end_library_index").setAttribute("max", 1365);
 
 	var guDiv = document.getElementById("gu");
