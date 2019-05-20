@@ -33,7 +33,7 @@ function handleRefresh() {
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    	if (this.readyState == 4 && this.status == 200) {
         updateLibrary(this);
 	    }
 	};
@@ -137,9 +137,16 @@ function updateLibrary(xml) {
 				
 				guDiv.appendChild(singleGu);
 				
+				var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue + ", " + row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue;
+
+				var gumapLink = document.createElement("a");
+				gumapLink.setAttribute("href", mapUrl);
+				
+				singleGu.appendChild(gumapLink);
+				gumapLink.appendChild(gumapDiv);
+				
 				singleGu.appendChild(guTitle);
 				singleGu.appendChild(guSub);
-				singleGu.appendChild(gumapDiv);
 				
 				showMap(gumapDiv, row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue, row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue);
 
@@ -161,6 +168,14 @@ function updateLibrary(xml) {
 		div.appendChild(title);
 		div.appendChild(sub);
 		div.appendChild(mapDiv);
+		
+		var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue + ", " + row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue;
+		
+		var gumapLink = document.createElement("a");
+		gumapLink.setAttribute("href", mapUrl);
+		
+		div.appendChild(gumapLink);
+		gumapLink.appendChild(mapDiv);
 		
 		showMap(mapDiv, row.getElementsByTagName("XCNTS")[0].childNodes[0].nodeValue, row.getElementsByTagName("YDNTS")[0].childNodes[0].nodeValue);
 	}

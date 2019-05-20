@@ -126,12 +126,18 @@ function updateLibrary(libraries) {
 				
 				guDiv.appendChild(singleGu);
 				
+				var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
+
+				var gumapLink = document.createElement("a");
+				gumapLink.setAttribute("href", mapUrl);
+				
+				singleGu.appendChild(gumapLink);
+				gumapLink.appendChild(gumapDiv);
+				
 				singleGu.appendChild(guTitle);
 				singleGu.appendChild(guSub);
-				singleGu.appendChild(gumapDiv);
 				
 				showMap(gumapDiv, library.XCNTS, library.YDNTS);
-				
 			}
 		}
 		if(value2){
@@ -149,33 +155,38 @@ function updateLibrary(libraries) {
 		librariesDiv.appendChild(div);
 		div.appendChild(title);
 		div.appendChild(sub);
-		div.appendChild(mapDiv);
-
-		showMap(mapDiv, library.XCNTS, library.YDNTS);
 		
+		//mapUrl, gumapLink는 이름만 같이씀
+		var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
+		
+		var gumapLink = document.createElement("a");
+		gumapLink.setAttribute("href", mapUrl);
+		
+		div.appendChild(gumapLink);
+		gumapLink.appendChild(mapDiv);
+		
+		showMap(mapDiv, library.XCNTS, library.YDNTS);
 	}
 }
 
-function todayIs() {
-	var today = new Date();
+/*function todayIs() {
 	var url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=2019&solMonth=05&serviceKey=KMJB89UDUGqIngamgEo%2FeX2gZ7jXWCelws8wKi2zu6YyobgX%2FzmU77OBCMmabTY4Ont3JDeDWHoNQrcAWf3UcQ%3D%3D";
 	
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-    	todayResult(this);
-    	localStorage.ssibal = 150;
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+    	if (this.readyState == 4 && this.status == 200) {
+    		todayResult(this);
 	    }
 	};
-	xhttp.open("GET", url, true);
-	xhttp.send();
+	xhr.open("GET", encodeURI(url), true);
+	xhr.send();
 }
 
 function todayResult(result) {
-	
-	result = result.response.body.items.item;
+	result = xmlDoc.getElementsByTagName("item");
 	var resultStr  = '';
-	const innerToday = 20; //today에서 Date만 뽑아냄
+	var innerToday = 5; //today에서 Date만 뽑아냄
+	
 	console.log("innerToday: " + innerToday);
 	for (var i = 0; i < result.length; i++) {
 		
@@ -221,3 +232,4 @@ function monthIs() {
 function monthResult(result) {
 	
 }
+*/
