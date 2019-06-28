@@ -2,6 +2,7 @@ window.onload = function() {
 	handleRefresh();
 }
 
+
 //localStorage 사용하는 방법
  
 function changeIndex(){
@@ -11,23 +12,110 @@ function changeIndex(){
 }
 
 function changeGu(){
-	localStorage.gu_selected = document.getElementById("gu_select").value;
+	const gu_name = document.getElementById("gu_select").value;
+	localStorage.gu_selected = gu_name;
+	
+	if(gu_name==='강남구') {
+		localStorage.start_library = 1;
+		localStorage.end_library = 54;
+	} else if(gu_name==='강동구') {
+		localStorage.start_library = 55;
+		localStorage.end_library = 105;
+	} else if(gu_name==='강북구') {
+		localStorage.start_library = 106;
+		localStorage.end_library = 158;
+	} else if(gu_name==='강서구') {
+		localStorage.start_library = 159;
+		localStorage.end_library = 239;
+	} else if(gu_name==='관악구') {
+		localStorage.start_library = 240;
+		localStorage.end_library = 294;
+	} else if(gu_name==='광진구') {
+		localStorage.start_library = 295;
+		localStorage.end_library = 331;
+	} else if(gu_name==='구로구') {
+		localStorage.start_library = 332;
+		localStorage.end_library = 412;
+	} else if(gu_name==='금천구') {
+		localStorage.start_library = 413;
+		localStorage.end_library = 437;
+	} else if(gu_name==='노원구') {
+		localStorage.start_library = 438;
+		localStorage.end_library = 483;
+	} else if(gu_name==='도봉구') {
+		localStorage.start_library = 484;
+		localStorage.end_library = 527;
+	} else if(gu_name==='동대문구') {
+		localStorage.start_library = 528;
+		localStorage.end_library = 569;
+	} else if(gu_name==='동작구') {
+		localStorage.start_library = 570;
+		localStorage.end_library = 621;
+	} else if(gu_name==='마포구') {
+		localStorage.start_library = 622;
+		localStorage.end_library = 675;
+	} else if(gu_name==='서대문구') {
+		localStorage.start_library = 676;
+		localStorage.end_library = 710;
+	} else if(gu_name==='성동구') {
+		localStorage.start_library = 780;
+		localStorage.end_library = 813;
+	} else if(gu_name==='성북구') {
+		localStorage.start_library = 814;
+		localStorage.end_library = 881;
+	} else if(gu_name==='서초구') {
+		localStorage.start_library = 711;
+		localStorage.end_library = 779
+	} else if(gu_name==='송파구') {
+		localStorage.start_library = 882;
+		localStorage.end_library = 962;
+	} else if(gu_name==='영등포구') {
+		localStorage.start_library = 1;
+		localStorage.end_library = 54;
+	} else if(gu_name==='용산구') {
+		localStorage.start_library = 1;
+		localStorage.end_library = 54;
+	} else if(gu_name==='양천구') {
+		localStorage.start_library = 963;
+		localStorage.end_library = 1012;
+	} else if(gu_name==='은평구') {
+		localStorage.start_library = 1125;
+		localStorage.end_library = 1222;
+	} else if(gu_name==='종로구') {
+		localStorage.start_library = 1223;
+		localStorage.end_library = 1272;
+	} else if(gu_name==='중구') {
+		localStorage.start_library = 1273;
+		localStorage.end_library = 1316;
+	} else if(gu_name==='중랑구') {
+		localStorage.start_library = 1315;
+		localStorage.end_library = 1366;
+	} 
+	
 	location.href = location.href;
 }
 
 function handleRefresh() {
 
+	const gu_name = localStorage.gu_selected;
+	
 	if(!localStorage.start_library) {
 		changeIndex();
 	} else {
 		document.getElementById("start_library_index").value = localStorage.start_library;
-		document.getElementById("end_library_index").value = localStorage.end_library;
+		document.getElementById("end_library_index").value = localStorage.end_library - localStorage.start_library + 1;
 	}
 	
 	if(!localStorage.gu_selected) {
 		changeGu();
 	} else {
-		document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected;
+		document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected + "가 선택되었습니다";
+		var gu_s = document.getElementById("gu_select");
+		for(var i = 0; i< gu_s.options.length; i++) {
+		  if(gu_name == gu_s.options[i].value) {
+			  gu_s.options[i].setAttribute('selected', 'selected');
+		  }
+		}
 	}
 
 	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + (parseInt(localStorage.start_library) + parseInt(localStorage.end_library) -1) + "/";
@@ -59,7 +147,6 @@ function showMap(mapContainer, x, y) {
 
 function updateLibrary(libraries) {
 	var librariesDiv = document.getElementById("libraries");
-	var guDiv = document.getElementById("gu");
 	
 	var max = parseInt(libraries.SeoulLibraryTimeInfo.list_total_count);
 	document.getElementById("end_library_index").setAttribute("max", max);
@@ -95,50 +182,6 @@ function updateLibrary(libraries) {
 		if(value1){
 			str = str + " 구명: "+ value1 + "<pre>\n</pre>";
 			
-			//Gu탭 처리 과정 끼워넣음
-			if(selected==value1){
-				var singleGu = document.createElement("div");
-				singleGu.setAttribute("class", "library");
-				var guTitle = document.createElement("span");
-				guTitle.setAttribute("class", "title");
-				var guSub = document.createElement("span");
-				guSub.setAttribute("class", "sub");
-				
-				guTitle.innerHTML = "No. "+library.LBRRY_SEQ_NO + " " +library.LBRRY_NAME + "<pre>\n</pre>";
-				
-				var guStr = "";
-				
-				if(value2){
-					guStr = guStr + " 주소: "+ value2 + "<pre>\n</pre>"
-				}
-				if(value3){
-					guStr = guStr + " 정기 휴관일: "+ value3 + "<pre>\n</pre>"
-				}
-				if(value4) {
-					guStr = guStr + " 전화번호: "+ value4 + "<pre>\n</pre>";
-				}
-				
-				guSub.innerHTML = guStr;
-				
-				var gumapDiv = document.createElement("div");
-				gumapDiv.setAttribute("class", "map");
-				gumapDiv.setAttribute("id", "map"+i);
-				
-				guDiv.appendChild(singleGu);
-				
-				var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
-
-				var gumapLink = document.createElement("a");
-				gumapLink.setAttribute("href", mapUrl);
-				
-				singleGu.appendChild(gumapLink);
-				gumapLink.appendChild(gumapDiv);
-				
-				singleGu.appendChild(guTitle);
-				singleGu.appendChild(guSub);
-				
-				showMap(gumapDiv, library.XCNTS, library.YDNTS);
-			}
 		}
 		if(value2){
 			str = str + " 주소: "+ value2 + "<pre>\n</pre>"
