@@ -8,6 +8,9 @@ window.onload = function() {
 function changeIndex(){
 	localStorage.start_library = document.getElementById("start_library_index").value;
 	localStorage.end_library = document.getElementById("end_library_index").value;
+	
+	localStorage.select = 'total';
+	
 	location.href = location.href;
 }
 
@@ -15,66 +18,68 @@ function changeGu(){
 	const gu_name = document.getElementById("gu_select").value;
 	localStorage.gu_selected = gu_name;
 	
+	localStorage.select = 'gu';
+	
 	if(gu_name==='강남구') {
 		localStorage.start_library = 1;
-		localStorage.end_library = 54;
+		localStorage.end_library = 53;
 	} else if(gu_name==='강동구') {
-		localStorage.start_library = 55;
-		localStorage.end_library = 105;
+		localStorage.start_library = 54;
+		localStorage.end_library = 104;
 	} else if(gu_name==='강북구') {
-		localStorage.start_library = 106;
-		localStorage.end_library = 158;
+		localStorage.start_library = 105;
+		localStorage.end_library = 157;
 	} else if(gu_name==='강서구') {
-		localStorage.start_library = 159;
+		localStorage.start_library = 158;
 		localStorage.end_library = 239;
 	} else if(gu_name==='관악구') {
 		localStorage.start_library = 240;
-		localStorage.end_library = 294;
+		localStorage.end_library = 293;
 	} else if(gu_name==='광진구') {
-		localStorage.start_library = 295;
-		localStorage.end_library = 331;
+		localStorage.start_library = 294;
+		localStorage.end_library = 330;
 	} else if(gu_name==='구로구') {
-		localStorage.start_library = 332;
-		localStorage.end_library = 412;
+		localStorage.start_library = 331;
+		localStorage.end_library = 411;
 	} else if(gu_name==='금천구') {
-		localStorage.start_library = 413;
-		localStorage.end_library = 437;
+		localStorage.start_library = 412;
+		localStorage.end_library = 436;
 	} else if(gu_name==='노원구') {
-		localStorage.start_library = 438;
-		localStorage.end_library = 483;
+		localStorage.start_library = 437;
+		localStorage.end_library = 482;
 	} else if(gu_name==='도봉구') {
-		localStorage.start_library = 484;
-		localStorage.end_library = 527;
+		localStorage.start_library = 483;
+		localStorage.end_library = 526;
 	} else if(gu_name==='동대문구') {
-		localStorage.start_library = 528;
-		localStorage.end_library = 569;
+		localStorage.start_library = 527;
+		localStorage.end_library = 568;
 	} else if(gu_name==='동작구') {
-		localStorage.start_library = 570;
-		localStorage.end_library = 621;
+		localStorage.start_library = 569;
+		localStorage.end_library = 620;
 	} else if(gu_name==='마포구') {
-		localStorage.start_library = 622;
-		localStorage.end_library = 675;
+		localStorage.start_library = 621;
+		localStorage.end_library = 674;
 	} else if(gu_name==='서대문구') {
-		localStorage.start_library = 676;
-		localStorage.end_library = 710;
+		localStorage.start_library = 675;
+		localStorage.end_library = 709;
 	} else if(gu_name==='성동구') {
-		localStorage.start_library = 780;
-		localStorage.end_library = 813;
+		localStorage.start_library = 779;
+		localStorage.end_library = 812;
 	} else if(gu_name==='성북구') {
-		localStorage.start_library = 814;
-		localStorage.end_library = 881;
+		localStorage.start_library = 813;
+		localStorage.end_library = 880;
 	} else if(gu_name==='서초구') {
-		localStorage.start_library = 711;
-		localStorage.end_library = 779
+		localStorage.start_library = 710;
+		localStorage.end_library = 778;
 	} else if(gu_name==='송파구') {
-		localStorage.start_library = 882;
+		localStorage.start_library = 881;
 		localStorage.end_library = 962;
 	} else if(gu_name==='영등포구') {
-		localStorage.start_library = 1;
-		localStorage.end_library = 54;
+		localStorage.start_library = 1013;
+		localStorage.end_library = 1068;
 	} else if(gu_name==='용산구') {
-		localStorage.start_library = 1;
-		localStorage.end_library = 54;
+		localStorage.start_library = 1069;
+		localStorage.end_library = 1124;
 	} else if(gu_name==='양천구') {
 		localStorage.start_library = 963;
 		localStorage.end_library = 1012;
@@ -86,9 +91,9 @@ function changeGu(){
 		localStorage.end_library = 1272;
 	} else if(gu_name==='중구') {
 		localStorage.start_library = 1273;
-		localStorage.end_library = 1316;
+		localStorage.end_library = 1315;
 	} else if(gu_name==='중랑구') {
-		localStorage.start_library = 1315;
+		localStorage.start_library = 1316;
 		localStorage.end_library = 1366;
 	} 
 	
@@ -99,26 +104,31 @@ function handleRefresh() {
 
 	const gu_name = localStorage.gu_selected;
 	
-	if(!localStorage.start_library) {
-		changeIndex();
+	if(!localStorage.select || localStorage.select=='total'){
+		if(!localStorage.start_library) {
+			changeIndex();
+		} else {
+			document.getElementById("start_library_index").value = localStorage.start_library;
+			document.getElementById("end_library_index").value = localStorage.end_library;
+		}
 	} else {
-		document.getElementById("start_library_index").value = localStorage.start_library;
-		document.getElementById("end_library_index").value = localStorage.end_library - localStorage.start_library + 1;
-	}
-	
-	if(!localStorage.gu_selected) {
-		changeGu();
-	} else {
-		document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected + "가 선택되었습니다";
-		var gu_s = document.getElementById("gu_select");
-		for(var i = 0; i< gu_s.options.length; i++) {
-		  if(gu_name == gu_s.options[i].value) {
-			  gu_s.options[i].setAttribute('selected', 'selected');
-		  }
+		if(!localStorage.gu_selected) {
+			changeGu();
+		} else {
+			document.getElementById("start_library_index").value = localStorage.start_library;
+			document.getElementById("end_library_index").value = localStorage.end_library;
+			
+			document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected + "가 선택되었습니다";
+			var gu_s = document.getElementById("gu_select");
+			for(var i = 0; i< gu_s.options.length; i++) {
+			  if(gu_name == gu_s.options[i].value) {
+				  gu_s.options[i].setAttribute('selected', 'selected');
+			  }
+			}
 		}
 	}
 
-	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + (parseInt(localStorage.start_library) + parseInt(localStorage.end_library) -1) + "/";
+	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + localStorage.end_library + "/";
 	$.getJSON(url, updateLibrary);
 }
 

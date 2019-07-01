@@ -45,8 +45,8 @@ body, html {
 		 
 		<div data-role="control" style="float: right; margin: 10px 50px; font-size: 20px;">
 		<label style="float: left;">시작<input type="number" id="start_library_index" value="1" min="1" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
-		<label style="float: left;">개수<input type="number" id="end_library_index" value="500" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
-		<button onClick="changeIndex()" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;">적용</button>
+		<label style="float: left;">끝<input type="number" id="end_library_index" value="500" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
+		<input type="button" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;" value="적용">
 		</div>
 		
 		<select id="gu_select" onchange="changeGu()">
@@ -78,7 +78,6 @@ body, html {
 		</select>
 		<span style="opacity:1; font-size: 15px;" id="select_gu_span"></span>
 		
-		<div id="gu"></div>
 	</div>
 		
 	<div id="libraries"></div>
