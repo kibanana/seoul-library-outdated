@@ -3,6 +3,17 @@
 body {
 	padding: 5% 10%;
 }
+
+  .btn_totop {
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+    width: 120px;
+    height: 60px;
+    z-index: 100;
+    color: #32b67a;
+  }
+  
 div#libraries {
 	background-color: #ccffcc;
 	-webkit-border-radius: 6px;

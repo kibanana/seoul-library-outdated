@@ -14,6 +14,12 @@ function changeIndex(){
 	location.href = location.href;
 }
 
+function searchName(){
+	localStorage.search_name = document.getElementById("lib_name").value;
+
+	location.href = location.href;
+}
+
 function changeGu(){
 	const gu_name = document.getElementById("gu_select").value;
 	localStorage.gu_selected = gu_name;
@@ -166,60 +172,63 @@ function updateLibrary(libraries) {
 	var selected = localStorage.gu_selected;
 
 	for (var i = 0; i < libraries.length; i++) {
-		//Total 탭
-		var library = libraries[i];
-		
-		var value1 = library.CODE_VALUE;
-		var value2 = library.ADRES;
-		var value3 = library.FDRM_CLOSE_DATE;
-		var value4 = library.TEL_NO;
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "library");
-		var title = document.createElement("span");
-		title.setAttribute("class", "title");
-		var sub = document.createElement("span");
-		sub.setAttribute("class", "sub");
-		
-		var mapDiv = document.createElement("div");
-		mapDiv.setAttribute("class", "map");
-		mapDiv.setAttribute("id", "map"+i);
-		
-		title.innerHTML = "No. "+library.LBRRY_SEQ_NO + " " +library.LBRRY_NAME + "<pre>\n</pre>";
-		
-		var str = "";
-		
-		if(value1){
-			str = str + " 구명: "+ value1 + "<pre>\n</pre>";
-			
+
+			var library = libraries[i];
+		if(library.LBRRY_NAME.indexOf(localStorage.search_name) !== -1 || localStorage.search_name == ''){
+			//Total 탭
+				var value1 = library.CODE_VALUE;
+				var value2 = library.ADRES;
+				var value3 = library.FDRM_CLOSE_DATE;
+				var value4 = library.TEL_NO;
+				
+				var div = document.createElement("div");
+				div.setAttribute("class", "library");
+				var title = document.createElement("span");
+				title.setAttribute("class", "title");
+				var sub = document.createElement("span");
+				sub.setAttribute("class", "sub");
+				
+				var mapDiv = document.createElement("div");
+				mapDiv.setAttribute("class", "map");
+				mapDiv.setAttribute("id", "map"+i);
+				
+				title.innerHTML = "No. "+library.LBRRY_SEQ_NO + " " +library.LBRRY_NAME + "<pre>\n</pre>";
+				
+				var str = "";
+				
+				if(value1){
+					str = str + " 구명: "+ value1 + "<pre>\n</pre>";
+					
+				}
+				if(value2){
+					str = str + " 주소: "+ value2 + "<pre>\n</pre>"
+				}
+				if(value3){
+					str = str + " 정기 휴관일: "+ value3 + "<pre>\n</pre>"
+				}
+				if(value4) {
+					str = str + " 전화번호: "+ value4 + "<pre>\n</pre>";
+				}
+				
+				sub.innerHTML = str;
+				
+				librariesDiv.appendChild(div);
+				div.appendChild(title);
+				div.appendChild(sub);
+				
+				//mapUrl, gumapLink는 이름만 같이씀
+				var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
+				
+				var gumapLink = document.createElement("a");
+				gumapLink.setAttribute("href", mapUrl);
+				
+				div.appendChild(gumapLink);
+				gumapLink.appendChild(mapDiv);
+				
+				showMap(mapDiv, library.XCNTS, library.YDNTS);
 		}
-		if(value2){
-			str = str + " 주소: "+ value2 + "<pre>\n</pre>"
-		}
-		if(value3){
-			str = str + " 정기 휴관일: "+ value3 + "<pre>\n</pre>"
-		}
-		if(value4) {
-			str = str + " 전화번호: "+ value4 + "<pre>\n</pre>";
-		}
-		
-		sub.innerHTML = str;
-		
-		librariesDiv.appendChild(div);
-		div.appendChild(title);
-		div.appendChild(sub);
-		
-		//mapUrl, gumapLink는 이름만 같이씀
-		var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
-		
-		var gumapLink = document.createElement("a");
-		gumapLink.setAttribute("href", mapUrl);
-		
-		div.appendChild(gumapLink);
-		gumapLink.appendChild(mapDiv);
-		
-		showMap(mapDiv, library.XCNTS, library.YDNTS);
 	}
+	localStorage.search_name = '';
 }
 
 /*function todayIs() {
