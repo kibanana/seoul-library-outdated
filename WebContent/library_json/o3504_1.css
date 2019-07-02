@@ -1,4 +1,8 @@
-/* lecture.css */
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap');
+
+* {
+    font-family: 'Do Hyeon', sans-serif;
+}
 
 body {
 	padding: 5% 10%;
