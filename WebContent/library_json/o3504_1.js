@@ -129,6 +129,8 @@ function handleRefresh() {
 			for(var i = 0; i< gu_s.options.length; i++) {
 			  if(gu_name == gu_s.options[i].value) {
 				  gu_s.options[i].setAttribute('selected', 'selected');
+				  gu_s.val(gu_s).attr('selected', 'selected'); 
+				  gu_s.selectmenu('refresh');	
 			  }
 			}
 		}
