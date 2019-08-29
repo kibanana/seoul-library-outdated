@@ -46,11 +46,10 @@ body, html {
 		 -->
 		 
 		<div data-role="control" style="float: right; margin: 10px 50px; font-size: 20px;">
-		<label style="float: left;">시작<input type="number" id="start_library_index" value="1" min="1" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
-		<label style="float: left;">끝<input type="number" id="end_library_index" value="500" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
-		<input type="button" onClick="changeIndex()" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;" value="적용">
+			<label style="float: left;">시작<input type="number" id="start_library_index" value="1" min="1" step="100" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
+			<label style="float: left;">끝<input type="number" id="end_library_index" value="500" step="100" style="float: left; width: 100px; height: 30px; padding: 5px; border-radius: 3px;"></label>
+			<input type="button" onClick="changeIndex()" style="width: 100px; height: 40px; display: inline-block; margin-left: 20px;" value="적용">
 		</div>
-		
 		
 		<select id="gu_select" onchange="changeGu()">
 			<option value="강남구">강남구</option>
@@ -81,7 +80,11 @@ body, html {
 		</select>
 		<div style="margin-top: 50px;">
 			<span style="opacity:1; font-size: 15px;" id="select_gu_span"></span>
-			<input type="text" id="lib_name"><button onClick="searchName()">검색</button>
+			<select id="searchTarget">
+				<option value="name">도서관명</option>
+				<option value="address">도서관 주소</option>
+			</select>
+			<input type="text" id="lib_name"><button onClick="ifSearch()">검색</button>
 		</div>
 	</div>
 	

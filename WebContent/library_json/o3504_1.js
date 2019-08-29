@@ -2,7 +2,6 @@ window.onload = function() {
 	handleRefresh();
 }
 
-
 //localStorage 사용하는 방법
  
 function changeIndex(){
@@ -14,9 +13,32 @@ function changeIndex(){
 	location.href = location.href;
 }
 
+function ifSearch(){
+	console.log(document.getElementById("searchTarget").value=="name");
+	if(document.getElementById("searchTarget").value=="name") {
+		setTimeout(function() {
+			searchName();
+		}, 3000);
+	} else {
+		searchAddress();
+	}
+}
+
+function searchAddress(){
+	localStorage.search_address = document.getElementById("lib_name").value;
+	
+	localStorage.start_library = 1;
+	localStorage.end_library = Math.ceil(document.getElementById("end_library_index").getAttribute("max")/2);
+	console.log(document.getElementById("end_library_index").getAttribute("max"));
+	location.href = location.href;
+}
+
 function searchName(){
 	localStorage.search_name = document.getElementById("lib_name").value;
-
+	
+	localStorage.start_library = 1;
+	localStorage.end_library = Math.ceil(document.getElementById("end_library_index").getAttribute("max")/2);
+	console.log(document.getElementById("end_library_index").getAttribute("max"));
 	location.href = location.href;
 }
 
@@ -125,8 +147,8 @@ function handleRefresh() {
 			document.getElementById("end_library_index").value = localStorage.end_library;
 			
 			document.getElementById("select_gu_span").innerHTML = localStorage.gu_selected + "가 선택되었습니다";
-			var gu_s = document.getElementById("gu_select");
-			for(var i = 0; i< gu_s.options.length; i++) {
+			let gu_s = document.getElementById("gu_select");
+			for(let i = 0; i< gu_s.options.length; i++) {
 			  if(gu_name == gu_s.options[i].value) {
 				  gu_s.options[i].setAttribute('selected', 'selected');
 				  gu_s.val(gu_s).attr('selected', 'selected'); 
@@ -136,25 +158,25 @@ function handleRefresh() {
 		}
 	}
 
-	var url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + localStorage.end_library + "/";
+	let url = "http://openapi.seoul.go.kr:8088/5865466b776b79773633685a426759/json/SeoulLibraryTimeInfo/" + localStorage.start_library + "/" + localStorage.end_library + "/";
 	$.getJSON(url, updateLibrary);
 }
 
 function showMap(mapContainer, x, y) {
 	
-	var mapOption = { 
+	let mapOption = { 
         center: new daum.maps.LatLng(x, y), // 지도의 중심좌표
         level: 4 // 지도의 확대 레벨
     };
 
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new daum.maps.Map(mapContainer, mapOption); 
+	let map = new daum.maps.Map(mapContainer, mapOption); 
 	
 	// 마커가 표시될 위치입니다 
-	var markerPosition  = new daum.maps.LatLng(x, y); 
+	let markerPosition  = new daum.maps.LatLng(x, y); 
 
 	// 마커를 생성합니다
-	var marker = new daum.maps.Marker({
+	let marker = new daum.maps.Marker({
 	    position: markerPosition
 	});
 
@@ -164,39 +186,37 @@ function showMap(mapContainer, x, y) {
 }
 
 function updateLibrary(libraries) {
-	var librariesDiv = document.getElementById("libraries");
+	let librariesDiv = document.getElementById("libraries");
 	
-	var max = parseInt(libraries.SeoulLibraryTimeInfo.list_total_count);
+	let max = parseInt(libraries.SeoulLibraryTimeInfo.list_total_count);
 	document.getElementById("end_library_index").setAttribute("max", max);
 	
 	libraries = libraries.SeoulLibraryTimeInfo.row;
 	
-	var selected = localStorage.gu_selected;
+	let selected = localStorage.gu_selected;
 
-	for (var i = 0; i < libraries.length; i++) {
-
-			var library = libraries[i];
-		if(library.LBRRY_NAME.indexOf(localStorage.search_name) !== -1 || localStorage.search_name == ''){
-			//Total 탭
-				var value1 = library.CODE_VALUE;
-				var value2 = library.ADRES;
-				var value3 = library.FDRM_CLOSE_DATE;
-				var value4 = library.TEL_NO;
+	for (let i = 0; i < libraries.length; i++) {
+		let library = libraries[i];
+		if((localStorage.search_name == '' && localStorage.search_address == '') || (!(localStorage.search_name == '') && library.LBRRY_NAME.indexOf(localStorage.search_name) !== -1) || (!(localStorage.search_address == '') && library.ADRES.indexOf(localStorage.search_address) !== -1)){
+				let value1 = library.CODE_VALUE;
+				let value2 = library.ADRES;
+				let value3 = library.FDRM_CLOSE_DATE;
+				let value4 = library.TEL_NO;
 				
-				var div = document.createElement("div");
+				let div = document.createElement("div");
 				div.setAttribute("class", "library");
-				var title = document.createElement("span");
+				let title = document.createElement("span");
 				title.setAttribute("class", "title");
-				var sub = document.createElement("span");
+				let sub = document.createElement("span");
 				sub.setAttribute("class", "sub");
 				
-				var mapDiv = document.createElement("div");
+				let mapDiv = document.createElement("div");
 				mapDiv.setAttribute("class", "map");
 				mapDiv.setAttribute("id", "map"+i);
 				
 				title.innerHTML = "No. "+library.LBRRY_SEQ_NO + " " +library.LBRRY_NAME + "<pre>\n</pre>";
 				
-				var str = "";
+				let str = "";
 				
 				if(value1){
 					str = str + " 구명: "+ value1 + "<pre>\n</pre>";
@@ -219,9 +239,9 @@ function updateLibrary(libraries) {
 				div.appendChild(sub);
 				
 				//mapUrl, gumapLink는 이름만 같이씀
-				var mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
+				let mapUrl = "https://www.google.com/maps/search/?api=1&query=" + library.XCNTS + ", " + library.YDNTS;
 				
-				var gumapLink = document.createElement("a");
+				let gumapLink = document.createElement("a");
 				gumapLink.setAttribute("href", mapUrl);
 				
 				div.appendChild(gumapLink);
@@ -231,12 +251,14 @@ function updateLibrary(libraries) {
 		}
 	}
 	localStorage.search_name = '';
+	localStorage.search_address = '';
+	localStorage.gu_selected = '';
 }
 
 /*function todayIs() {
-	var url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=2019&solMonth=05&serviceKey=KMJB89UDUGqIngamgEo%2FeX2gZ7jXWCelws8wKi2zu6YyobgX%2FzmU77OBCMmabTY4Ont3JDeDWHoNQrcAWf3UcQ%3D%3D";
+	let url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=2019&solMonth=05&serviceKey=KMJB89UDUGqIngamgEo%2FeX2gZ7jXWCelws8wKi2zu6YyobgX%2FzmU77OBCMmabTY4Ont3JDeDWHoNQrcAWf3UcQ%3D%3D";
 	
-	var xhr = new XMLHttpRequest();
+	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
     		todayResult(this);
@@ -248,16 +270,16 @@ function updateLibrary(libraries) {
 
 function todayResult(result) {
 	result = xmlDoc.getElementsByTagName("item");
-	var resultStr  = '';
-	var innerToday = 5; //today에서 Date만 뽑아냄
+	let resultStr  = '';
+	let innerToday = 5; //today에서 Date만 뽑아냄
 	
 	console.log("innerToday: " + innerToday);
-	for (var i = 0; i < result.length; i++) {
+	for (let i = 0; i < result.length; i++) {
 		
-		var singleResult = result[i];
+		let singleResult = result[i];
 		
 		if(singleResult.isHoliday==="Y"){
-			var singleDay = singleResult.locdate; // ex) 20190505
+			let singleDay = singleResult.locdate; // ex) 20190505
 			if(innerToday == singleDay.substring(6, 8)) {
 				resultStr = singleResult.dateName;
 			}
@@ -271,19 +293,19 @@ function todayResult(result) {
 		resultStr = "오늘은 공휴일이 아닙니다";
 	}
 	
-	var todayResult = document.createElement("span");
+	let todayResult = document.createElement("span");
 	todayResult.setAttribute("class", "sub");
 	todayResult.innerHTML = resultStr
 	
-	var div = document.getElementById("today");
+	let div = document.getElementById("today");
 	div.appendChild(todayResult);
 	
 }
 
 function monthIs() {
-	var url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=" + year + "&solMonth=" + month + "&serviceKey=KMJB89UDUGqIngamgEo%2FeX2gZ7jXWCelws8wKi2zu6YyobgX%2FzmU77OBCMmabTY4Ont3JDeDWHoNQrcAWf3UcQ%3D%3D";
+	let url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=" + year + "&solMonth=" + month + "&serviceKey=KMJB89UDUGqIngamgEo%2FeX2gZ7jXWCelws8wKi2zu6YyobgX%2FzmU77OBCMmabTY4Ont3JDeDWHoNQrcAWf3UcQ%3D%3D";
 
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     	monthResult(this);
