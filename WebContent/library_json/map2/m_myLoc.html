@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>어디를 가더라도 거기엔 여러분이 있습니다</title>
+        <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+          <script src="https://maps.google.com/maps/api/js?key=AIzaSyA7nnoG8FxJ8CcMFYcE_isUIH-GUFvu4jA">
+        </script>
+        <script src="myLoc.js"></script>
+        <link rel="stylesheet" href="m_myLoc.css">
+    </head>
+<body>
+    <div class="container-fluid">
+    <button type="button" class="btn btn-lg btn-primary btn-block" style="margin-bottom:5px">get my location</button>
+    <center>
+    <button type="button" class="btn btn-success" id="watch">Watch me</button>
+    <button type="button" class="btn btn-danger" id="clearWatch">Clear watch</button>
+    </center>
+        <div id="location">
+        여러분의위치가 여기에 나타날 것입니다.
+        </div>
+        <div id="distance">
+        WickedlySmart HQ(위키들리스마트 본부)와의 거리가 여기에 나타날 것입니다.
+        </div>
+        <div id="map">
+        지도가 나타납니다
+        </div>
+    </div>
+</body>
+</html>

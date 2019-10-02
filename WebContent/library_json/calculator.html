@@ -1,0 +1,151 @@
+<html>
+  <head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <style>
+      body{
+      background-color:rgb(255, 230, 255);} 
+      .box{
+      background-color:#3366ff;
+      height:350px;
+      width:290px;
+      border-radius:10px;
+      position:relative;
+      top:10px;
+      border-style: outset;
+      border-color: lightgray;
+      border-width: 10px } 
+      .display{
+      background-color:#006666;
+      width:230px;
+      position:relative;
+      left:5px;
+      top:10px;
+      height:40px;}
+      .display input{
+      position:relative;
+      left:2px;
+      top:2px;
+      height:35px;
+      color:black;
+      background-color:#ccffff;
+      width:215px;
+      font-size:21px;
+      text-align:right;}
+      .keys{
+      position:relative;
+      top:15px;}
+      .button{
+      width:40px;
+      height:30px;
+      border:none;
+      border-radius:8px;
+      margin-left:17px;
+      cursor:pointer;
+      border-top:2px solid transparent;}
+      .button.gray{
+      color:white;
+      background-color:#9d9d9d; 
+      border-top: lightgray 2px solid;
+      border-bottom:black 2px solid;
+      }
+      .button.aqua{
+      color:yellow;
+      background-color:aqua;
+      border-top: blue 2px solid;
+      border-bottom:black 2px solid;
+      }
+      .button.blue{
+      color:white;
+      background-color:blue;
+      border-top:2px aqua solid;
+      border-bottom:red 2px solid;
+      }
+
+      .button.red{
+      color:black;
+      background-color:red;
+      border-top:2px FF9933 solid;
+      border-bottom:black 2px solid;
+      }
+      .gray:active{
+      border-top:black 2px solid;
+      border-bottom:2px white solid;}
+      .aqua:active{
+      border-top:black 2px solid;
+      border-bottom:white 2px solid;}
+      .blue:active{
+      border-top:black 2px solid;
+      border-bottom:white 2px solid;}
+      .orange:active{
+      border-top:black 2px solid;
+      border-bottom:white 2px solid;}
+      p{
+      line-height:10px;}
+      .buttongo:hover {
+      background-color: #008CBA;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      }
+      /* 마지막버튼 디자인*/
+  </style>
+  <script>
+      function cle(val){
+      document.getElementById("d").value=val;}
+      function v(val){
+      document.getElementById("d").value+=val;}
+      function cal() { 
+      try { 
+      cle(eval(document.getElementById("d").value)) } 
+      catch(cal) {
+      cle('Error') } }  
+      function back(){
+      document.getElementById("d").value = document.getElementById("d").value.slice(0,document.getElementById("d").value.length-1);
+      }
+  </script>
+  </head>
+  <body>
+  
+    <div class="container mt-3" class="bg-primary">
+      <div class="media-body">
+          <center><br>
+            <div class="box">
+                <div class="display"><input type="text" readonly size="18" id="d"></div>
+                    <div class="keys">
+                    <p><input type="button" class="button gray" value="Pi" onclick='v("3.14")'>
+                    <input type="button" class="button gray" value="(" onclick='v("(")'>
+                    <input type="button" class="button gray" value=")" onclick='v(")")'>
+                    <input type="button" class="button aqua" value="/" onclick='v("/")'></p>
+                    <p><input type="button" class="button blue"value="1" onclick='v("1")'>
+                    <input type="button" class="button blue" value="2" onclick='v("2")'>
+                    <input type="button" class="button blue" value="3" onclick='v("3")'>
+                    <input type="button" class="button aqua" value="+" onclick='v("+")'></p>
+                    <p><input type="button" class="button blue" value="4" onclick='v("4")'>
+                    <input type="button" class="button blue" value="5" onclick='v("5")'>
+                    <input type="button" class="button blue" value="6" onclick='v("6")'>
+                    <input type="button" class="button aqua" value="-" onclick='v("-")'></p>
+                    <p><input type="button" class="button blue" value="7" onclick='v("7")'>
+                    <input type="button" class="button blue" value="8" onclick='v("8")'>
+                    <input type="button" class="button blue" value="9" onclick='v("9")'>
+                    <input type="button" class="button aqua" value="*" onclick='v("*")'></p>
+                    <p><input type="button" class="button blue" value="0" onclick='v("0")'>
+                    <input type="button" class="button blue" value="." onclick='v(".")'>
+                    <input type="button" class="button blue" value="C" onclick='cle("")'>
+                    <input type="button" class="button red" value="=" onclick='cal()'></p>
+                    <p><input type="button" class="button blue" value="sin" onclick='v("Math.sin")'>
+                    <input type="button" class="button blue" value="cos" onclick='v("Math.cos")'>
+                    <input type="button" class="button blue" value="tan" onclick='v("Math.tan")'>
+                    <input type="button" class="button red" value="<<" onclick='back()'>
+                    </div>
+                </div>
+            </div><br><br><br>
+          </center>
+          <center><button type="button" class="btn btn-outline-primary"><a href="index.html">HOME</a></button></center>
+      </div>
+    </div>
+  </body>
+</html>​

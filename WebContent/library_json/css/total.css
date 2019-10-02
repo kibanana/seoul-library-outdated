@@ -1,0 +1,113 @@
+:root {
+    --color1: #f1404b;
+    --color2: #dddfe6;
+    --color3: #f4f5f9;
+    --color4: #252c41;
+  }
+
+  ::selection {background:#dddfe6; color: #000; text-shadow: none;}
+
+  input:focus { 
+    outline: none; 
+  } 
+
+.content_center {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+}
+
+.logo {
+    background: linear-gradient(150deg, #dd1818 0%, #52616a 100%);
+    display: inline-block;
+    margin: auto;
+    background: #fff;
+    font-family: 'Acme', sans-serif;
+    font-size: 3.2rem;
+    text-align: center;
+    user-select: none;
+  }
+  
+  .logo span {
+    margin: auto;
+    background: linear-gradient(150deg, #dd1818 0%, #52616a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  /* submenu 글씨 hover 시 효과 */
+    .btn_nav {
+    width: 190px;
+    height: 50px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: white;
+    background: linear-gradient(150deg, #dd1818 0%, #52616a 100%);
+	-webkit-transition: all .28s ease-in-out;
+    transition: all .28s ease-in-out;
+    margin-left: 8px;
+    user-select: none;
+    opacity: 0.7;
+    }
+
+    .btn_nav:hover,
+    .btn_nav:focus,
+    .btn_nav:active {
+        letter-spacing: 6px;
+        opacity: 0.8;
+    }
+
+    .btn_nav:after,
+    .btn_nav:before {
+        bottom: 0;
+        content: " ";
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        -webkit-transition: all .28s ease-in-out;
+        transition: all .28s ease-in-out;
+        width: 0;
+    }
+    .btn_nav:hover:after,
+    .btn_nav:hover:before {
+        -webkit-transition: width 350ms ease-in-out;
+        transition: width 350ms ease-in-out;
+        width: 70%;
+    }
+    .btn_nav:hover:before {
+        bottom: auto;
+        top: 0;
+    }
+
+
+    hr.devider {
+        color: var(--color2);
+    }
+
+    div {
+        margin: 30px 0;
+    }
+
+    div.video-content {
+        border-top: white 5px double;
+        border-bottom: white 5px double;
+
+        margin: 70px 0;
+        padding: 70px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    a:active {
+        text-decoration: none;
+    }
+    a:visited {
+        text-decoration: none;
+    }

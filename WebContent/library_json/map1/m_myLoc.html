@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<title>어디를 가더라도 거기엔 여러분이 있습니다</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyA7nnoG8FxJ8CcMFYcE_isUIH-GUFvu4jA">
+</script>
+
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link rel="stylesheet" 	href="https://code.jquery.com/ui/1.12.0/themes/sunny/jquery-ui.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="myLoc.js"></script>
+<link rel="stylesheet" href="m_myLoc.css">
+
+</head>
+<body>
+
+<div data-role="header" 
+style="background:green; color:yellow; text-align:center; 
+text-valign:middle; height:25px; font-size:15pt; padding:20px;">
+google map myLoc</div>
+<div class="container">
+<form>
+<input type="button" id="watch" value="Watch me">
+<input type="button" id="clearWatch" value="Clear watch">
+</form>
+</div>
+
+<div id="location">
+여러분의위치가 여기에 나타날 것입니다.
+</div>
+
+<div id="distance">
+WickedlySmart HQ(위키들리스마트 본부)와의 거리가 여기에 나타날 것입니다.
+</div>
+
+<div id="map">
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=536932f08b467ff4d95606541c2e8192&libraries=services"></script>  
+        <script src="jquery.xdomainajax.js" type="text/javascript"></script>
+        <script src="dust.js" type="text/javascript" ></script>
+        <link href="dust.css" rel="stylesheet">
+        <title>dust</title> 
+            <script>
+            $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+            });
+            </script>
+    </head>
+    <body>
+        <div style="margin-top:10px" align="center">
+        <font size=4>실시간 대기오염 정보 조회 서비스</font>
+        </div>
+
+        <div class="container" style="margin-top:7px; margin-bottom:0px" >
+            <div class="row">
+                <div class="col-sm-6"> 
+                    <div id="map"></div>
+                </div>
+
+                <div class="col-sm-6">
+                        <div id="block2">   
+                            <div id="b2">
+                                <center>
+                                 <select class="btn btn-info" style="height:35px; width:130px;" name="location" onChange="selectLoc(this.value);">                               
+                                    <option value="">지역선택</option>
+                                    <option value="서울특별시">서울</option>
+                                    <option value="부산광역시">부산</option>
+                                    <option value="대구광역시">대구</option>
+                                    <option value="인천광역시">인천</option>
+                                    <option value="광주광역시">광주</option>
+                                    <option value="대전광역시">대전</option>
+                                    <option value="울산광역시">울산</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option> 
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="제주특별자치도">제주</option>
+                                
+                                </select>
+                                 <button type="button" style="height:35px; width:130px;" data-toggle="popover"  
+                                         data-content="지도위에 나의 현재 위치가 표시됩니다" class="btn btn-info" id="myloc" onclick="moveTomyLocation();">현재 위치
+                                 </button> 
+                                </center>
+                            </div>
+                        </div>
+                            
+                        <table   style = "font-size:90%"  class="table table-striped" margin="4px">
+                            <tr>
+                                <th>측정날짜</th><td id="d_1">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>측정소</th><td id="d_2">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>통합지수</th><td id="d_3">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>미세먼지</th><td id="d_4">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>오존</th><td id="d_5">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>일산화 탄소</th><td id="d_6">로딩중</td>
+                            </tr>
+                            <tr>
+                                <th>천식폐질환지수</th><td id="d_7">로딩중</td>
+                            </tr>
+                        </table>
+                </div>
+            </div> 
+        </div> 
+    </body>
+</html>

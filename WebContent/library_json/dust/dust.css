@@ -1,0 +1,44 @@
+body {
+    background-color: #eff8f8;
+    background-image:url(body-bg.gif);
+    background-repeat: repeat-x;
+    margin: 0;
+    padding:10px;
+    line-height: 1.4em;
+    font-size: 130%;
+}
+span
+{
+    text-decoration:none;
+    border-bottom:2px solid   #acaca6;
+}
+
+#map
+{
+    border: 2px solid #e4e4dd;
+    width:99%;
+    height:425px;
+    margin:1.5% auto;
+}
+select{
+    width:150px;
+    font-size: 80%;     
+    vertical-align:middle;
+    margin:10px;
+}
+
+#b2
+{
+    margin:2px auto 0; 
+    padding: 1px;
+    border: 1px solid #e0e0d8;
+    background-color:#d7e8ec; 
+    height:55px;
+    margin-bottom: 1px;
+}
+
+th {
+    height:10px;
+    font-size:85%; 
+    font-weight:bold; 
+}
